@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const EMPTY_FORM = { exerciseType: '', exercise: '', sets: '', reps: '', weight: '', duration: '', distance: '', notes: '' };
+const EMPTY_FORM = { exerciseType: '', exercise: 'Treadmill', sets: '', reps: '', weight: '', duration: '', distance: '', notes: '' };
 
 export default function WorkoutForm({ onAdd }) {
   const [form, setForm] = useState(EMPTY_FORM);
@@ -32,14 +32,19 @@ export default function WorkoutForm({ onAdd }) {
     <form className="workout-form" onSubmit={handleSubmit}>
       <div className="field-row field-row--triple">
         <select name="exerciseType" value={form.exerciseType} onChange={handleChange} required>
-          <option value="" disabled>Select type…</option>
+          <option value="" disabled>Type</option>
           <option value="Cardio">Cardio</option>
           <option value="Weightlifting">Weightlifting</option>
           <option value="Other">Other</option>
         </select>
+        <select name="exercise" value={form.exercise} onChange={handleChange} required>
+          <option value="Treadmill">Treadmill</option>
+          <option value="Stair Master">Stair Master</option>
+          <option value="Stationary Bike">Stationary Bike</option>
+        </select>
         <input
           name="exercise"
-          placeholder="Exercise Name"
+          placeholder="Name"
           value={form.exercise}
           onChange={handleChange}
           required
