@@ -1,5 +1,4 @@
-//import UpperBodyForm from './UpperBodyForm.jsx';
-import CardioForm from './CardioForm.jsx';
+import UpperBodyForm from './UpperBodyForm.jsx';
 import { EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
 export default function UpperBody({ workouts, onAdd, onDelete }) {
@@ -34,7 +33,7 @@ export default function UpperBody({ workouts, onAdd, onDelete }) {
 
   return (
     <>
-      <CardioForm onAdd={onAdd} />
+      <UpperBodyForm onAdd={onAdd} />
       {content}
     </>
   );
