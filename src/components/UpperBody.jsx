@@ -23,7 +23,7 @@ export default function UpperBody({ workouts, onAdd, onDelete }) {
   } else {
     content = (
       <div>
-       <p>{latestUpperBodyExercises[0]?.exercise}: {latestUpperBodyExercises[0]?.sets} x {latestUpperBodyExercises[0]?.reps} {latestUpperBodyExercises[0]?.weight} lbs</p>
+        <p>{EXERCISES_BY_CATEGORY['Upper Body'][0]}</p>
       </div>
     );
   }
