@@ -1,4 +1,4 @@
-import UpperBodyForm from './UpperBodyForm.jsx';
+//import UpperBodyForm from './UpperBodyForm.jsx';
 import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
 export default function UpperBody({ workouts, onAdd, onDelete }) {
