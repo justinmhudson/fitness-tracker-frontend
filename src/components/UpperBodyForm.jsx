@@ -20,7 +20,7 @@ export default function UpperBodyForm({ onAdd }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!form.category || !form.exercise || !form.distance) return;
+    if (!form.category || !form.exercise || !form.sets || !form.reps || !form.weight) return;
 
     setSubmitting(true);
     try {

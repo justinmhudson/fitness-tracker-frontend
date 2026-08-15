@@ -14,27 +14,12 @@ export default function CardioForm({ onAdd }) {
 
   function handleChange(e) {
     const { name, value } = e.target;
-
-    /*
-    if (name === 'category') {
-      // Whenever category changes, reset exercise to the first option
-      // in that new category — otherwise it could stay set to an
-      // exercise that doesn't belong there anymore.
-      setForm((prev) => ({
-        ...prev,
-        category: value,
-        exercise: EXERCISES_BY_CATEGORY[value][0],
-      }));
-      return;
-    }
-      */
-    
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!form.category || !form.exercise || !form.distance) return;
+    if (!form.category || !form.exercise || !form.distance || !form.duration) return;
 
     setSubmitting(true);
     try {
