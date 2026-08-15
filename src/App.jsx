@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import NavBar from './components/NavBar.jsx';
-import WorkoutForm from './components/WorkoutForm.jsx';
 import WorkoutList from './components/WorkoutList.jsx';
 import Homepage from './components/Homepage.jsx';
 import { getWorkouts, createWorkout, deleteWorkout } from './api.js';
@@ -9,6 +8,7 @@ export default function App() {
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [activeTab, setActiveTab] = useState('Home');
 
   // Load workouts once when the app first mounts
   useEffect(() => {
@@ -43,7 +43,6 @@ export default function App() {
       </header>
 
       <NavBar activeTab={activeTab} onTabChange={setActiveTab} />
-      {activeTab === 'Home' && <WorkoutForm onAdd={handleAdd} />}
 
       {error && <p className="error-banner">{error}</p>}
 

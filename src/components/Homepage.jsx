@@ -1,17 +1,21 @@
-export default function Homepage({ workouts, onDelete }) {
+import WorkoutForm from './WorkoutForm.jsx';
+
+export default function Homepage({ workouts, onAdd, onDelete }) {
 
   const latestTreadmill = workouts
     .filter((w) => w.exercise === 'Treadmill' && w.duration === 30)
     .reduce((latest, w) => (
       !latest || new Date(w.date) > new Date(latest.date) ? w : latest
     ), null);
-  
-  if (workouts.length === 0) {
-    return <p className="empty-state">No workouts logged yet. Add your first one above.</p>;
-  }
 
-  if (latestTreadmill != null) {
-    return (
+
+  let content;
+  if (workouts.length === 0) {
+    content = <p className="empty-state">No workouts logged yet. Add your first one above.</p>;
+  } else if (latestTreadmill == null) {
+    content = <p className="empty-state">No treadmills logged yet. Add your first one above.</p>;
+  } else {
+    content = (
       <div>
         <h2>Current Treadmill Pace — {Math.ceil((latestTreadmill.distance * 2) * 10) / 10} mph</h2>
         <div className="table-wrapper">
@@ -53,4 +57,11 @@ export default function Homepage({ workouts, onDelete }) {
       </div>
     );
   }
+
+  return (
+    <>
+      <WorkoutForm onAdd={onAdd} />
+      {content}
+    </>
+  );
 }
