@@ -8,7 +8,7 @@ export default function App() {
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeTab, setActiveTab] = useState('Home');
+  const [activeTab, setActiveTab] = useState('Cardio');
 
   // Load workouts once when the app first mounts
   useEffect(() => {
