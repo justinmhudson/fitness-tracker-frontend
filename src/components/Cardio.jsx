@@ -1,6 +1,6 @@
-import WorkoutForm from './WorkoutForm.jsx';
+import CardioForm from './CardioForm.jsx';
 
-export default function Homepage({ workouts, onAdd, onDelete }) {
+export default function Cardio({ workouts, onAdd, onDelete }) {
 
   const latestTreadmill = workouts
     .filter((w) => w.exercise === 'Treadmill' && w.duration === 30)
@@ -60,7 +60,7 @@ export default function Homepage({ workouts, onAdd, onDelete }) {
 
   return (
     <>
-      <WorkoutForm onAdd={onAdd} />
+      <CardioForm onAdd={onAdd} />
       {content}
     </>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import NavBar from './components/NavBar.jsx';
 import WorkoutList from './components/WorkoutList.jsx';
-import Homepage from './components/Homepage.jsx';
+import Cardio from './components/Cardio.jsx';
 import { getWorkouts, createWorkout, deleteWorkout } from './api.js';
 
 export default function App() {
@@ -47,9 +47,9 @@ export default function App() {
       {error && <p className="error-banner">{error}</p>}
 
       {loading ? (
-        <p className="loading-state">Loading homepage…</p>
-      ) : activeTab === 'Home' ? (
-        <Homepage workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} />
+        <p className="loading-state">Loading…</p>
+      ) : activeTab === 'Cardio' ? (
+        <Cardio workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} />
       ) : (
         <WorkoutList workouts={workouts} onDelete={handleDelete} />
       )}
