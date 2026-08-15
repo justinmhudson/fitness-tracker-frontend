@@ -43,13 +43,6 @@ export default function WorkoutForm({ onAdd }) {
           <option value="Stationary Bike">Stationary Bike</option>
         </select>
         <input
-          name="exercise"
-          placeholder="Name"
-          value={form.exercise}
-          onChange={handleChange}
-          required
-        />
-        <input
           name="distance"
           type="number"
           min="0"
