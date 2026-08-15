@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
 const EMPTY_FORM = {
-  category: CATEGORIES[0],
-  exercise: EXERCISES_BY_CATEGORY[CATEGORIES[0]][0],
+  category: '',
+  exercise: '',
   distance: '',
+  sets: '',
+  reps: '',
 };
 
 export default function WorkoutForm({ onAdd }) {
@@ -48,14 +50,22 @@ export default function WorkoutForm({ onAdd }) {
 
   return (
     <form className="workout-form" onSubmit={handleSubmit}>
-      <div className="field-row field-row--triple">
+      <div className="field-row">
         <select name="category" value={form.category} onChange={handleChange} required>
+          <option value="" disabled>
+            Select category
+          </option>
           {CATEGORIES.map((cat) => (
             <option key={cat} value={cat}>
               {cat}
             </option>
           ))}
         </select>
+      </div>
+
+      {form.category === 'Cardio' && (
+      <>
+      <div className="field-row field-row--double">
         <select name="exercise" value={form.exercise} onChange={handleChange} required>
           {EXERCISES_BY_CATEGORY[form.category].map((ex) => (
             <option key={ex} value={ex}>
@@ -76,6 +86,41 @@ export default function WorkoutForm({ onAdd }) {
       <button type="submit" disabled={submitting}>
         {submitting ? 'Adding…' : 'Log workout'}
       </button>
+      </>
+      )}
+
+      {form.category !== 'Cardio' && (
+      <>
+      <div className="field-row field-row--triple">
+        <select name="exercise" value={form.exercise} onChange={handleChange} required>
+          {EXERCISES_BY_CATEGORY[form.category].map((ex) => (
+            <option key={ex} value={ex}>
+              {ex}
+            </option>
+          ))}
+        </select>
+        <input
+          name="sets"
+          type="number"
+          min="1"
+          placeholder="Sets"
+          value={form.sets}
+          onChange={handleChange}
+        />
+        <input
+          name="reps"
+          type="number"
+          min="1"
+          placeholder="Reps"
+          value={form.reps}
+          onChange={handleChange}
+        />
+      </div>
+      <button type="submit" disabled={submitting}>
+        {submitting ? 'Adding…' : 'Log workout'}
+      </button>
+      </>
+      )}
     </form>
   );
 }
