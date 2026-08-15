@@ -56,6 +56,12 @@ h1 {
   margin-bottom: 0.7rem;
 }
 
+.field-row--double {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
 .field-row--triple {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

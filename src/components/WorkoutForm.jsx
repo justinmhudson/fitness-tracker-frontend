@@ -1,6 +1,11 @@
 import { useState } from 'react';
+import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
-const EMPTY_FORM = { exerciseType: 'Cardio', exercise: 'Treadmill', sets: '', reps: '', weight: '', duration: '', distance: '', notes: '' };
+const EMPTY_FORM = {
+  category: CATEGORIES[0],
+  exercise: EXERCISES_BY_CATEGORY[CATEGORIES[0]][0],
+  distance: '',
+};
 
 export default function WorkoutForm({ onAdd }) {
   const [form, setForm] = useState(EMPTY_FORM);
@@ -8,17 +13,30 @@ export default function WorkoutForm({ onAdd }) {
 
   function handleChange(e) {
     const { name, value } = e.target;
+
+    if (name === 'category') {
+      // Whenever category changes, reset exercise to the first option
+      // in that new category — otherwise it could stay set to an
+      // exercise that doesn't belong there anymore.
+      setForm((prev) => ({
+        ...prev,
+        category: value,
+        exercise: EXERCISES_BY_CATEGORY[value][0],
+      }));
+      return;
+    }
+    
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!form.exerciseType || !form.exercise) return;
+    if (!form.category || !form.exercise) return;
 
     setSubmitting(true);
     try {
       await onAdd({
-        exerciseType: form.exerciseType,
+        category: form.category,
         exercise: form.exercise,
         distance: form.distance,
       });
@@ -31,15 +49,19 @@ export default function WorkoutForm({ onAdd }) {
   return (
     <form className="workout-form" onSubmit={handleSubmit}>
       <div className="field-row field-row--triple">
-        <select name="exerciseType" value={form.exerciseType} onChange={handleChange} required>
-          <option value="Cardio">Cardio</option>
-          <option value="Weightlifting">Weightlifting</option>
-          <option value="Other">Other</option>
+        <select name="category" value={form.category} onChange={handleChange} required>
+          {CATEGORIES.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
         </select>
         <select name="exercise" value={form.exercise} onChange={handleChange} required>
-          <option value="Treadmill">Treadmill</option>
-          <option value="Stair Master">Stair Master</option>
-          <option value="Stationary Bike">Stationary Bike</option>
+          {EXERCISES_BY_CATEGORY[form.category].map((ex) => (
+            <option key={ex} value={ex}>
+              {ex}
+            </option>
+          ))}
         </select>
         <input
           name="distance"
