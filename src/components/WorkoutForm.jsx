@@ -56,7 +56,7 @@ export default function WorkoutForm({ onAdd }) {
       <div className="field-row">
         <select name="category" value={form.category} onChange={handleChange} required>
           <option value="" disabled>
-            Select category
+            Log a workout
           </option>
           {CATEGORIES.map((cat) => (
             <option key={cat} value={cat}>
