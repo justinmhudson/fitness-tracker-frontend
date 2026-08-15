@@ -1,5 +1,5 @@
 import { useState } from 'react';
-//import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
+import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
 const EMPTY_FORM = {
   category: 'Cardio',
