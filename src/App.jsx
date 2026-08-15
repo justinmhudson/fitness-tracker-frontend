@@ -49,7 +49,7 @@ export default function App() {
       {loading ? (
         <p className="loading-state">Loading homepage…</p>
       ) : activeTab === 'Home' ? (
-        <Homepage workouts={workouts} onDelete={handleDelete} />
+        <Homepage workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} />
       ) : (
         <WorkoutList workouts={workouts} onDelete={handleDelete} />
       )}
