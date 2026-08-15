@@ -51,7 +51,7 @@ export default function App() {
       ) : activeTab === 'Cardio' ? (
         <Cardio workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} />
       ) : (
-        <WorkoutList workouts={workouts} onDelete={handleDelete} />
+        <UpperBody workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} />
       )}
     </div>
   );
