@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import NavBar from './components/NavBar.jsx';
 import WorkoutForm from './components/WorkoutForm.jsx';
 import WorkoutList from './components/WorkoutList.jsx';
+import Homepage from './components/Homepage.jsx';
 import { getWorkouts, createWorkout, deleteWorkout } from './api.js';
 
 export default function App() {
@@ -40,12 +42,15 @@ export default function App() {
         <h1>Fitness Tracker</h1>
       </header>
 
-      <WorkoutForm onAdd={handleAdd} />
+      <NavBar activeTab={activeTab} onTabChange={setActiveTab} />
+      {activeTab === 'Home' && <WorkoutForm onAdd={handleAdd} />}
 
       {error && <p className="error-banner">{error}</p>}
 
       {loading ? (
-        <p className="loading-state">Loading workouts…</p>
+        <p className="loading-state">Loading homepage…</p>
+      ) : activeTab === 'Home' ? (
+        <Homepage workouts={workouts} onDelete={handleDelete} />
       ) : (
         <WorkoutList workouts={workouts} onDelete={handleDelete} />
       )}

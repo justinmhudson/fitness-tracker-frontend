@@ -40,7 +40,10 @@ export default function WorkoutForm({ onAdd }) {
       await onAdd({
         category: form.category,
         exercise: form.exercise,
-        distance: form.distance,
+        distance: form.distance ? Number(form.distance) : undefined,
+        sets: form.sets ? Number(form.sets) : undefined,
+        reps: form.reps ? Number(form.reps) : undefined,
+        duration: form.category === 'Cardio' ? 30 : undefined, // default duration for cardio
       });
       setForm(EMPTY_FORM);
     } finally {
