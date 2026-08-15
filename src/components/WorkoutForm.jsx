@@ -7,6 +7,7 @@ const EMPTY_FORM = {
   distance: '',
   sets: '',
   reps: '',
+  weight: ''
 };
 
 export default function WorkoutForm({ onAdd }) {
@@ -43,6 +44,7 @@ export default function WorkoutForm({ onAdd }) {
         distance: form.distance ? Number(form.distance) : undefined,
         sets: form.sets ? Number(form.sets) : undefined,
         reps: form.reps ? Number(form.reps) : undefined,
+        weight: form.weight ? Number(form.weight) : undefined,
         duration: form.category === 'Cardio' ? 30 : undefined, // default duration for cardio
       });
       setForm(EMPTY_FORM);
@@ -94,7 +96,7 @@ export default function WorkoutForm({ onAdd }) {
 
       {form.category && form.category !== 'Cardio' && (
       <>
-      <div className="field-row field-row--triple">
+      <div className="field-row field-row--double">
         <select name="exercise" value={form.exercise} onChange={handleChange} required>
           {EXERCISES_BY_CATEGORY[form.category].map((ex) => (
             <option key={ex} value={ex}>
@@ -102,6 +104,16 @@ export default function WorkoutForm({ onAdd }) {
             </option>
           ))}
         </select>
+        <input
+          name="weight"
+          type="number"
+          min="1"
+          placeholder="Weight (lbs)"
+          value={form.weight}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="field-row field-row--double">
         <input
           name="sets"
           type="number"
