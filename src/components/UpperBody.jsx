@@ -4,7 +4,7 @@ import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
 export default function UpperBody({ workouts, onAdd, onDelete }) {
 
-  content = (
+  const content = (
     <div>
       {workouts.map((w) => (
         <p key={w._id}>
