@@ -89,7 +89,7 @@ export default function WorkoutForm({ onAdd }) {
       </>
       )}
 
-      {form.category !== 'Cardio' && (
+      {form.category && form.category !== 'Cardio' && (
       <>
       <div className="field-row field-row--triple">
         <select name="exercise" value={form.exercise} onChange={handleChange} required>
