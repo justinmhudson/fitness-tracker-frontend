@@ -6,7 +6,7 @@ export default function UpperBody({ workouts, onAdd, onDelete }) {
 
     const latestUpperBodyExercises = [];
 
-    for (const category of EXERCISES_BY_CATEGORY['Upper Body'][0]) {
+    for (const category of EXERCISES_BY_CATEGORY['Upper Body']) {
         const latestExercise = workouts
         .filter((w) => w.exercise === category)
         .reduce((latest, w) => (
@@ -23,7 +23,9 @@ export default function UpperBody({ workouts, onAdd, onDelete }) {
   } else {
     content = (
       <div>
-        <p>{EXERCISES_BY_CATEGORY['Upper Body'][0]}</p>
+        for (const e of latestUpperBodyExercises) {
+            <p>Latest {e.exercise} — {e.sets} x {e.reps} @ {e.weight} lbs</p>
+        }
       </div>
     );
   }
