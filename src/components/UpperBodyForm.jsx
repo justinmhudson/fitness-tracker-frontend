@@ -3,7 +3,7 @@ import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
 const EMPTY_FORM = {
   category: 'Upper Body',
-  exercise: '',
+  exercise: EXERCISES_BY_CATEGORY['Upper Body'][0],
   sets: '',
   reps: '',
   weight: '',

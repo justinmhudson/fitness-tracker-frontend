@@ -3,7 +3,7 @@ import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
 const EMPTY_FORM = {
   category: 'Cardio',
-  exercise: '',
+  exercise: EXERCISES_BY_CATEGORY['Cardio'][0],
   distance: '',
   duration: '30',
 };
