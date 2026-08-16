@@ -129,11 +129,11 @@ return (
               checked={form.isFail}
               onChange={handleChange}
             />
-            Failed Attempt?
+            Failed?
           </label>
         </div>
         <button type="submit" disabled={submitting}>
-          {submitting ? 'Adding…' : 'Log workout'}
+          {submitting ? 'Adding…' : 'Log Workout'}
         </button>
       </form>
       <>

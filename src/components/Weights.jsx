@@ -23,8 +23,8 @@ export default function Weights({ workouts, onAdd, activeTab }) {
   }, [activeTab]);
 
   function handleChange(e) {
-    const { name, value } = e.target;   
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;   
+    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   }
 
   async function handleSubmit(e) {
@@ -136,13 +136,13 @@ export default function Weights({ workouts, onAdd, activeTab }) {
             name="isFail"
             type="checkbox"
             checked={form.isFail}
-            onChange={(e) => setForm((prev) => ({ ...prev, isFail: e.target.checked }))}
+            onChange={handleChange}
           />
-          Failed Attempt?
+          Failed?
         </label>
       </div>
       <button type="submit" disabled={submitting}>
-        {submitting ? 'Adding…' : 'Log workout'}
+        {submitting ? 'Adding…' : 'Log Workout'}
       </button>
     </form>
     {content}

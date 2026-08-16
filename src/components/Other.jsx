@@ -80,7 +80,7 @@ return (
           </select>
         </div>
         <button type="submit" disabled={submitting}>
-          {submitting ? 'Adding…' : 'Log workout'}
+          {submitting ? 'Adding…' : 'Log Workout'}
         </button>
       </form>
       <>
