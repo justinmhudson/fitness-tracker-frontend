@@ -104,9 +104,9 @@ export default function Cardio({ workouts, onAdd }) {
     );
   }
 
-let form;
+let cardioForm;
 if (form.exercise === 'Stair Master') {
-  form = (
+  cardioForm = (
     <form className="workout-form" onSubmit={handleSubmit}>
       <div className="field-row field-row--double">
         <select name="exercise" value={form.exercise} onChange={handleChange} required>
@@ -152,7 +152,7 @@ if (form.exercise === 'Stair Master') {
     </form>
   )
 } else {
-  form = (
+  cardioForm = (
     <form className="workout-form" onSubmit={handleSubmit}>
       <div className="field-row field-row--triple-alt">
         <select name="exercise" value={form.exercise} onChange={handleChange} required>
@@ -189,7 +189,7 @@ if (form.exercise === 'Stair Master') {
 }
 return (
     <>
-      {form}
+      {cardioForm}
       {table}
     </>
   );
