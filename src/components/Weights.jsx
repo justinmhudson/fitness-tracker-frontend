@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
 import { EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
+// <input type="date"> requires "YYYY-MM-DD". MongoDB gives back a full
+// ISO timestamp (e.g. "2026-08-15T00:00:00.000Z"), so this trims it down.
+function toDateInputValue(isoString) {
+  return new Date(isoString).toISOString().slice(0, 10);
+}
+
 export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab }) {
 
   const [form, setForm] = useState({
@@ -90,10 +96,10 @@ export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 5);
 
-  let content;
+ let content;
   if (workouts.length === 0) {
     content = <p className="empty-state">No workouts logged yet. Add your first one above.</p>;
-  } else if (recentWeights.length === 0) {
+  } else if (recentForExercise.length === 0) {
     content = <p className="empty-state">No {form.exercise} entries logged yet. Add your first one above.</p>;
   } else {
     content = (
@@ -112,13 +118,21 @@ export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab
               </tr>
             </thead>
             <tbody>
-              {recentWeights.map((w) => {
+              {recentForExercise.map((w) => {
                 const isEditing = editingId === w._id;
                 return (
                   <tr key={w._id} className={w.isFail ? 'row--failed' : ''}>
-                    <td>{new Date(w.date).toLocaleDateString()}</td>
                     {isEditing ? (
                       <>
+                        <td>
+                          <input
+                            className="table-edit-input"
+                            name="date"
+                            type="date"
+                            value={editValues.date}
+                            onChange={handleEditChange}
+                          />
+                        </td>
                         <td>
                           <input
                             className="table-edit-input"
@@ -178,6 +192,7 @@ export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab
                       </>
                     ) : (
                       <>
+                        <td>{new Date(w.date).toLocaleDateString()}</td>
                         <td>{w.weight} lbs</td>
                         <td>{w.sets}</td>
                         <td>{w.reps}</td>
