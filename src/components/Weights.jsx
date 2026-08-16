@@ -3,11 +3,23 @@ import { EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
 // <input type="date"> requires "YYYY-MM-DD". MongoDB gives back a full
 // ISO timestamp (e.g. "2026-08-15T00:00:00.000Z"), so this trims it down.
-function toDateInputValue(isoString) {
+function utcToLocal(isoString) {
   const date = new Date(isoString);
-  const offsetMs = date.getTimezoneOffset() * 60 * 1000;
-  const localISODate = new Date(date.getTime() - offsetMs).toISOString().slice(0, -1);
-  return localISODate.toISOString().slice(0, 10);
+  const localIsoStr = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().slice(0, -1);
+}
+
+function isoStringToDate(isoString) {
+  return new Date(isoString).toISOString().slice(0, 10);
+}
+
+function dateToIsoString(dateStr) {
+  const date = new Date(dateStr);
+  return new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString();
+}
+
+function localToUtc(dateStr) {
+  const date = new Date(dateStr);
+  return new Date(date.getTime() + (date.getTimezoneOffset() * 60000)).toISOString();
 }
 
 export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab }) {
@@ -68,7 +80,7 @@ export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab
   function startEditing(w) {
     setEditingId(w._id);
     setEditValues({
-      date: toDateInputValue(w.date),
+      date: isoStringToDate(utcToLocal(w.date)),
       weight: w.weight,
       sets: w.sets,
       reps: w.reps,
@@ -89,7 +101,7 @@ export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab
     setSavingEdit(true);
     try {
       await onUpdate(id, {
-        date: editValues.date,
+        date: localToUtc(dateToIsoString(editValues.date)),
         weight: Number(editValues.weight),
         sets: Number(editValues.sets),
         reps: Number(editValues.reps),
