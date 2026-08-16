@@ -32,9 +32,7 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
       });
       setForm((prev) => ({
         ...prev,
-        sets: '',
-        reps: '',
-        weight: '',
+        distance: '',
       }));
     } finally {
       setSubmitting(false);
@@ -47,6 +45,7 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
       !latest || new Date(w.date) > new Date(latest.date) ? w : latest
     ), null);
 
+  const newGoal = latestCardio.distance  + 0.01
 
   let content;
   if (workouts.length === 0) {
@@ -56,7 +55,7 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
   } else {
     content = (
       <div>
-        <h3>Current {form.exercise} Pace — {Math.ceil((latestCardio.distance * 2) * 10) / 10} mph</h3>
+        <h3>Current {form.exercise} Pace — {Math.ceil((newGoal * 2) * 10) / 10} mph</h3>
         <div className="table-wrapper">
           <table>
             <thead>
@@ -68,27 +67,27 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
             <tbody>
               <tr>
                 <td>05:00</td>
-                <td>{Math.ceil((latestCardio.distance / 6) * 100) / 100} mi</td>
+                <td>{Math.ceil((newGoal / 6) * 100) / 100} mi</td>
               </tr>
               <tr>
                 <td>10:00</td>
-                <td>{Math.ceil((latestCardio.distance / 6 * 2) * 100) / 100} mi</td>
+                <td>{Math.ceil((newGoal / 6 * 2) * 100) / 100} mi</td>
               </tr>
               <tr>
                 <td>15:00</td>
-                <td>{Math.ceil((latestCardio.distance / 6 * 3) * 100) / 100} mi</td>
+                <td>{Math.ceil((newGoal / 6 * 3) * 100) / 100} mi</td>
               </tr>
               <tr>
                 <td>20:00</td>
-                <td>{Math.ceil((latestCardio.distance / 6 * 4) * 100) / 100} mi</td>
+                <td>{Math.ceil((newGoal / 6 * 4) * 100) / 100} mi</td>
               </tr>
               <tr>
                 <td>25:00</td>
-                <td>{Math.ceil((latestCardio.distance / 6 * 5) * 100) / 100} mi</td>
+                <td>{Math.ceil((newGoal / 6 * 5) * 100) / 100} mi</td>
               </tr>
               <tr>
                 <td>30:00</td>
-                <td>{Math.ceil((latestCardio.distance) * 100) / 100} mi</td>
+                <td>{Math.ceil((newGoal) * 100) / 100} mi</td>
               </tr>
             </tbody>
           </table>
