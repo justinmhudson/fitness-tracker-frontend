@@ -60,9 +60,9 @@ export default function Cardio({ workouts, onAdd }) {
     const newGoal = latestCardio.exercise === 'Stair Master' ? latestCardio.distance + 1 : latestCardio.distance + 0.01;
     table = (
       <div>
-        <h3>Last {form.exercise} Attempt:</h3>
-        <h3 className="last-line">{new Date(latestCardio.date).toLocaleDateString()} — {form.exercise === 'Stair Master' ? latestCardio.distance.toFixed(0) : latestCardio.distance.toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</h3>
-        <h3 className="last-line">New {form.exercise} Pace — {form.exercise === 'Stair Master' ? "Level" + (form.level + 1) : (Math.ceil((newGoal * 2) * 10) / 10).toFixed(1)  + "mph"}</h3>
+        <h3>Last {latestCardio.exercise} Attempt:</h3>
+        <h3 className="last-line">{new Date(latestCardio.date).toLocaleDateString()} — {latestCardio.exercise === 'Stair Master' ? latestCardio.distance.toFixed(0) : latestCardio.distance.toFixed(2)} {latestCardio.exercise === 'Stair Master' ? 'ft' : 'mi'}</h3>
+        <h3 className="last-line">New {latestCardio.exercise} Pace — {latestCardio.exercise === 'Stair Master' ? "Level " + (latestCardio.level + 1) : (Math.ceil((newGoal * 2) * 10) / 10).toFixed(1)  + "mph"}</h3>
         
         <div className="table-wrapper">
           <table>
@@ -75,27 +75,27 @@ export default function Cardio({ workouts, onAdd }) {
             <tbody>
               <tr>
                 <td>05:00</td>
-                <td>{form.exercise === 'Stair Master' ? Math.ceil(newGoal / 6).toFixed(0) : (Math.ceil((newGoal / 6) * 100) / 100).toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
+                <td>{latestCardio.exercise === 'Stair Master' ? Math.ceil(newGoal / 6).toFixed(0) : (Math.ceil((newGoal / 6) * 100) / 100).toFixed(2)} {latestCardio.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
               </tr>
               <tr>
                 <td>10:00</td>
-                <td>{form.exercise === 'Stair Master' ? Math.ceil(newGoal / 6 * 2).toFixed(0) : (Math.ceil((newGoal / 6 * 2) * 100) / 100).toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
+                <td>{latestCardio.exercise === 'Stair Master' ? Math.ceil(newGoal / 6 * 2).toFixed(0) : (Math.ceil((newGoal / 6 * 2) * 100) / 100).toFixed(2)} {latestCardio.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
               </tr>
               <tr>
                 <td>15:00</td>
-                <td>{form.exercise === 'Stair Master' ? Math.ceil(newGoal / 6 * 3).toFixed(0) : (Math.ceil((newGoal / 6 * 3) * 100) / 100).toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
+                <td>{latestCardio.exercise === 'Stair Master' ? Math.ceil(newGoal / 6 * 3).toFixed(0) : (Math.ceil((newGoal / 6 * 3) * 100) / 100).toFixed(2)} {latestCardio.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
               </tr>
               <tr>
                 <td>20:00</td>
-                <td>{form.exercise === 'Stair Master' ? Math.ceil(newGoal / 6 * 4).toFixed(0) : (Math.ceil((newGoal / 6 * 4) * 100) / 100).toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
+                <td>{latestCardio.exercise === 'Stair Master' ? Math.ceil(newGoal / 6 * 4).toFixed(0) : (Math.ceil((newGoal / 6 * 4) * 100) / 100).toFixed(2)} {latestCardio.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
               </tr>
               <tr>
                 <td>25:00</td>
-                <td>{form.exercise === 'Stair Master' ? Math.ceil(newGoal / 6 * 5).toFixed(0) : (Math.ceil((newGoal / 6 * 5) * 100) / 100).toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
+                <td>{latestCardio.exercise === 'Stair Master' ? Math.ceil(newGoal / 6 * 5).toFixed(0) : (Math.ceil((newGoal / 6 * 5) * 100) / 100).toFixed(2)} {latestCardio.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
               </tr>
               <tr>
                 <td>30:00</td>
-                <td>{form.exercise === 'Stair Master' ? Math.ceil(newGoal).toFixed(0) : (Math.ceil((newGoal) * 100) / 100).toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
+                <td>{latestCardio.exercise === 'Stair Master' ? Math.ceil(newGoal).toFixed(0) : (Math.ceil((newGoal) * 100) / 100).toFixed(2)} {latestCardio.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
               </tr>
             </tbody>
           </table>
