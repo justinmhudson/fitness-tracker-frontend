@@ -38,6 +38,20 @@ h1 {
   color: var(--primary-dark);
 }
 
+h2 {
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.3rem;
+  color: var(--primary-dark);
+}
+
+h3 {
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.3rem;
+  color: var(--primary-dark);
+}
+
 .subtitle {
   margin: 0;
   color: #5b6b68;

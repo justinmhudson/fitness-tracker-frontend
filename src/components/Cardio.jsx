@@ -58,8 +58,9 @@ export default function Cardio({ workouts, onAdd }) {
   } else {
     content = (
       <div>
-        <h3>Last {form.exercise} Attempt — {new Date(latestCardio.date).toLocaleDateString()} — {latestCardio.distance} mi</h3>
-        <h3>New {form.exercise} Pace — {Math.ceil((newGoal * 2) * 10) / 10} mph</h3>
+        <h3>Last {form.exercise} Attempt:</h3>
+        <h3>{new Date(latestCardio.date).toLocaleDateString()} — {latestCardio.distance.toFixed(2)} mi</h3>
+        <h3>New {form.exercise} Pace — {(Math.ceil((newGoal * 2) * 10) / 10).toFixed(1)} mph</h3>
         <div className="table-wrapper">
           <table>
             <thead>
@@ -71,27 +72,27 @@ export default function Cardio({ workouts, onAdd }) {
             <tbody>
               <tr>
                 <td>05:00</td>
-                <td>{Math.ceil((newGoal / 6) * 100) / 100} mi</td>
+                <td>{(Math.ceil((newGoal / 6) * 100) / 100).toFixed(2)} mi</td>
               </tr>
               <tr>
                 <td>10:00</td>
-                <td>{Math.ceil((newGoal / 6 * 2) * 100) / 100} mi</td>
+                <td>{(Math.ceil((newGoal / 6 * 2) * 100) / 100).toFixed(2)} mi</td>
               </tr>
               <tr>
                 <td>15:00</td>
-                <td>{Math.ceil((newGoal / 6 * 3) * 100) / 100} mi</td>
+                <td>{(Math.ceil((newGoal / 6 * 3) * 100) / 100).toFixed(2)} mi</td>
               </tr>
               <tr>
                 <td>20:00</td>
-                <td>{Math.ceil((newGoal / 6 * 4) * 100) / 100} mi</td>
+                <td>{(Math.ceil((newGoal / 6 * 4) * 100) / 100).toFixed(2)} mi</td>
               </tr>
               <tr>
                 <td>25:00</td>
-                <td>{Math.ceil((newGoal / 6 * 5) * 100) / 100} mi</td>
+                <td>{(Math.ceil((newGoal / 6 * 5) * 100) / 100).toFixed(2)} mi</td>
               </tr>
               <tr>
                 <td>30:00</td>
-                <td>{Math.ceil((newGoal) * 100) / 100} mi</td>
+                <td>{(Math.ceil((newGoal) * 100) / 100).toFixed(2)} mi</td>
               </tr>
             </tbody>
           </table>
