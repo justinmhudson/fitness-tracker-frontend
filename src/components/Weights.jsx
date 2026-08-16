@@ -67,7 +67,7 @@ export default function Weights({ workouts, onAdd, activeTab }) {
   } else {
     content = (
       <div>
-        <h3>Last Five {form.exercise} Attempts</h3>
+        <h3 className="last-line">Last Five {form.exercise} Attempts</h3>
         <div className="table-wrapper">
           <table>
             <thead>

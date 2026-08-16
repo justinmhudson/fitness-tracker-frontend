@@ -52,6 +52,10 @@ h3 {
   color: var(--primary-dark);
 }
 
+.last-line {
+  margin-bottom: 2rem;
+}
+
 .subtitle {
   margin: 0;
   color: #5b6b68;

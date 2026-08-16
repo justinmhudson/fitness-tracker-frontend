@@ -44,7 +44,7 @@ export default function Other({ workouts, onAdd }) {
   } else {
      content = (
       <div>
-        <h3>Last Five Rest Day Activities</h3>
+        <h3 className="last-line">Last Five Rest Day Activities</h3>
         <div className="table-wrapper">
           <table>
             <thead>
