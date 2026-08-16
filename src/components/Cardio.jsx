@@ -6,6 +6,7 @@ const EMPTY_FORM = {
   exercise: EXERCISES_BY_CATEGORY['Cardio'][0],
   distance: '',
   duration: '30',
+  isFail: false,
 };
 
 export default function Cardio({ workouts, onAdd, onDelete }) {
@@ -29,10 +30,12 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
         exercise: form.exercise,
         distance: form.distance,
         duration: form.duration,
+        isFail: form.isFail,
       });
       setForm((prev) => ({
         ...prev,
         distance: '',
+        isFail: false,
       }));
     } finally {
       setSubmitting(false);
@@ -40,7 +43,7 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
   }
 
   const latestCardio = workouts
-    .filter((w) => w.exercise === form.exercise && w.duration === 30)
+    .filter((w) => w.exercise === form.exercise && w.duration === 30 && !w.isFail)
     .reduce((latest, w) => (
       !latest || new Date(w.date) > new Date(latest.date) ? w : latest
     ), null);
@@ -99,7 +102,7 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
 return (
     <div>
       <form className="workout-form" onSubmit={handleSubmit}>
-        <div className="field-row field-row--double">
+        <div className="field-row field-row--triple">
           <select name="exercise" value={form.exercise} onChange={handleChange} required>
             {EXERCISES_BY_CATEGORY[form.category].map((ex) => (
               <option key={ex} value={ex}>
@@ -116,6 +119,13 @@ return (
             value={form.distance}
             onChange={handleChange}
           />
+          <input
+            name="isFail"
+            type="checkbox"
+            checked={form.isFail}
+            onChange={(e) => setForm((prev) => ({ ...prev, isFail: e.target.checked }))}
+          />
+          <label htmlFor="isFail">Failed Attempt</label>
         </div>
         <button type="submit" disabled={submitting}>
           {submitting ? 'Adding…' : 'Log workout'}
