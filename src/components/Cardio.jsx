@@ -62,7 +62,7 @@ export default function Cardio({ workouts, onAdd }) {
       <div>
         <h3>Last {form.exercise} Attempt:</h3>
         <h3 className="last-line">{new Date(latestCardio.date).toLocaleDateString()} — {form.exercise === 'Stair Master' ? latestCardio.distance.toFixed(0) : latestCardio.distance.toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</h3>
-        <h3 className="last-line">New {form.exercise} Pace — {form.exercise === 'Stair Master' ? form.level + 1 : (Math.ceil((newGoal * 2) * 10) / 10).toFixed(1)} mph</h3>
+        <h3 className="last-line">New {form.exercise} Pace — {form.exercise === 'Stair Master' ? "Level" + (form.level + 1) : (Math.ceil((newGoal * 2) * 10) / 10).toFixed(1)  + "mph"}</h3>
         
         <div className="table-wrapper">
           <table>
