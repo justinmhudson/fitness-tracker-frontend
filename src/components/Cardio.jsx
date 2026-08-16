@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
 const EMPTY_FORM = {
@@ -41,8 +41,8 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
     }
   }
 
-  const latestTreadmill = workouts
-    .filter((w) => w.exercise === 'Treadmill' && w.duration === 30)
+  const latestCardio = workouts
+    .filter((w) => w.exercise === form.exercise && w.duration === 30)
     .reduce((latest, w) => (
       !latest || new Date(w.date) > new Date(latest.date) ? w : latest
     ), null);
@@ -51,12 +51,12 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
   let content;
   if (workouts.length === 0) {
     content = <p className="empty-state">No workouts logged yet. Add your first one above.</p>;
-  } else if (latestTreadmill == null) {
-    content = <p className="empty-state">No treadmills logged yet. Add your first one above.</p>;
+  } else if (latestCardio == null) {
+    content = <p className="empty-state">No {form.exercise.toLowerCase()} exercises logged yet. Add your first one above.</p>;
   } else {
     content = (
       <div>
-        <h3>Current Treadmill Pace — {Math.ceil((latestTreadmill.distance * 2) * 10) / 10} mph</h3>
+        <h3>Current {form.exercise} Pace — {Math.ceil((latestCardio.distance * 2) * 10) / 10} mph</h3>
         <div className="table-wrapper">
           <table>
             <thead>
@@ -68,27 +68,27 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
             <tbody>
               <tr>
                 <td>05:00</td>
-                <td>{Math.ceil((latestTreadmill.distance / 6) * 100) / 100} mi</td>
+                <td>{Math.ceil((latestCardio.distance / 6) * 100) / 100} mi</td>
               </tr>
               <tr>
                 <td>10:00</td>
-                <td>{Math.ceil((latestTreadmill.distance / 6 * 2) * 100) / 100} mi</td>
+                <td>{Math.ceil((latestCardio.distance / 6 * 2) * 100) / 100} mi</td>
               </tr>
               <tr>
                 <td>15:00</td>
-                <td>{Math.ceil((latestTreadmill.distance / 6 * 3) * 100) / 100} mi</td>
+                <td>{Math.ceil((latestCardio.distance / 6 * 3) * 100) / 100} mi</td>
               </tr>
               <tr>
                 <td>20:00</td>
-                <td>{Math.ceil((latestTreadmill.distance / 6 * 4) * 100) / 100} mi</td>
+                <td>{Math.ceil((latestCardio.distance / 6 * 4) * 100) / 100} mi</td>
               </tr>
               <tr>
                 <td>25:00</td>
-                <td>{Math.ceil((latestTreadmill.distance / 6 * 5) * 100) / 100} mi</td>
+                <td>{Math.ceil((latestCardio.distance / 6 * 5) * 100) / 100} mi</td>
               </tr>
               <tr>
                 <td>30:00</td>
-                <td>{Math.ceil((latestTreadmill.distance) * 100) / 100} mi</td>
+                <td>{Math.ceil((latestCardio.distance) * 100) / 100} mi</td>
               </tr>
             </tbody>
           </table>
