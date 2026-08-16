@@ -99,7 +99,7 @@ export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab
  let content;
   if (workouts.length === 0) {
     content = <p className="empty-state">No workouts logged yet. Add your first one above.</p>;
-  } else if (recentForExercise.length === 0) {
+  } else if (recentWeights.length === 0) {
     content = <p className="empty-state">No {form.exercise} entries logged yet. Add your first one above.</p>;
   } else {
     content = (
@@ -118,7 +118,7 @@ export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab
               </tr>
             </thead>
             <tbody>
-              {recentForExercise.map((w) => {
+              {recentWeights.map((w) => {
                 const isEditing = editingId === w._id;
                 return (
                   <tr key={w._id} className={w.isFail ? 'row--failed' : ''}>
