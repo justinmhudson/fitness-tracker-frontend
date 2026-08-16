@@ -114,7 +114,7 @@ export default function Weights({ workouts, onAdd, activeTab }) {
           onChange={handleChange}
         />
       </div>
-      <div className="field-row field-row--triple">
+      <div className="field-row field-row--triple-alt">
         <input
           name="sets"
           type="number"
