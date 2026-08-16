@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
 const EMPTY_FORM = {
@@ -45,7 +45,7 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
       !latest || new Date(w.date) > new Date(latest.date) ? w : latest
     ), null);
 
-  const newGoal = latestCardio.distance  + 0.01
+  const newGoal = latestCardio ? latestCardio.distance + 0.01 : null;
 
   let content;
   if (workouts.length === 0) {
