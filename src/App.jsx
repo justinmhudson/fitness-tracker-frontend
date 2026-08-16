@@ -50,6 +50,8 @@ export default function App() {
         <p className="loading-state">Loading…</p>
       ) : activeTab === 'Cardio' ? (
         <Cardio workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} />
+      ) : activeTab === 'Other' ? (
+        <Other workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} />
       ) : (
         <Weights workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} activeTab={activeTab} />
       )}

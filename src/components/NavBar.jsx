@@ -1,4 +1,4 @@
-const TABS = ['Cardio', 'Upper Body', 'Lower Body'];
+const TABS = ['Cardio', 'Upper Body', 'Lower Body', 'Other'];
 
 export default function NavBar({ activeTab, onTabChange }) {
   return (

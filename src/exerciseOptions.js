@@ -5,6 +5,7 @@ export const EXERCISES_BY_CATEGORY = {
   Cardio: ['Treadmill', 'Stair Master', 'Stationary Bike'],
   'Upper Body': ['Chest Press', 'Pulldown', 'Row', 'Shoulder Press', 'Bicep Curl', 'Tricep Press'],
   'Lower Body': ['Leg Press', 'Back Extension', 'Leg Curl', 'Calf Extension', 'Abdominal'],
+  'Other': ['Yoga', 'Balance'],
 };
 
 export const CATEGORIES = Object.keys(EXERCISES_BY_CATEGORY);
