@@ -41,32 +41,6 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
     }
   }
 
-  return (
-    <form className="workout-form" onSubmit={handleSubmit}>
-      <div className="field-row field-row--double">
-        <select name="exercise" value={form.exercise} onChange={handleChange} required>
-          {EXERCISES_BY_CATEGORY[form.category].map((ex) => (
-            <option key={ex} value={ex}>
-              {ex}
-            </option>
-          ))}
-        </select>
-        <input
-          name="distance"
-          type="number"
-          min="0"
-          step="0.01"
-          placeholder="Distance (mi)"
-          value={form.distance}
-          onChange={handleChange}
-        />
-      </div>
-      <button type="submit" disabled={submitting}>
-        {submitting ? 'Adding…' : 'Log workout'}
-      </button>
-    </form>
-  );
-
   const latestTreadmill = workouts
     .filter((w) => w.exercise === 'Treadmill' && w.duration === 30)
     .reduce((latest, w) => (
@@ -123,9 +97,34 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
     );
   }
 
-  return (
-    <>
-      {content}
-    </>
+return (
+    <div>
+      <form className="workout-form" onSubmit={handleSubmit}>
+        <div className="field-row field-row--double">
+          <select name="exercise" value={form.exercise} onChange={handleChange} required>
+            {EXERCISES_BY_CATEGORY[form.category].map((ex) => (
+              <option key={ex} value={ex}>
+                {ex}
+              </option>
+            ))}
+          </select>
+          <input
+            name="distance"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="Distance (mi)"
+            value={form.distance}
+            onChange={handleChange}
+          />
+        </div>
+        <button type="submit" disabled={submitting}>
+          {submitting ? 'Adding…' : 'Log workout'}
+        </button>
+      </form>
+      <>
+        {content}
+      </>
+    </div>
   );
 }
