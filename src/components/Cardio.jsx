@@ -126,7 +126,7 @@ return (
               checked={form.isFail}
               onChange={(e) => setForm((prev) => ({ ...prev, isFail: e.target.checked }))}
             />
-            Failed Attempt
+            Failed Attempt?
           </label>
         </div>
         <button type="submit" disabled={submitting}>

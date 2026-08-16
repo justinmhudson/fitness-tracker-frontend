@@ -1,10 +1,10 @@
 :root {
-  --ink: #2774AE;
-  --paper: #2774AE;
+  --ink: #1c2b2a;
+  --paper: #f7f8f6;
   --card: #ffffff;
-  --primary: #FFD100;
-  --primary-dark: #c09d00;
-  --accent: #8BB8E8;
+  --primary: #14615c;
+  --primary-dark: #0d423f;
+  --accent: #e2984a;
   --border: #e1e4e0;
   --danger: #c1523f;
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -103,7 +103,7 @@ select:focus {
   align-items: center;
   gap: 0.45rem;
   font-size: 0.88rem;
-  color: var(--ink);
+  color: #4b5b58;
   white-space: nowrap;
   cursor: pointer;
 }
@@ -122,7 +122,7 @@ button {
   border: none;
   border-radius: 8px;
   background: var(--primary);
-  color: var(--ink);
+  color: white;
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
