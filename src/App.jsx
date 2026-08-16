@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import NavBar from './components/NavBar.jsx';
 import Cardio from './components/Cardio.jsx';
 import Weights from './components/Weights.jsx';
+import Other from './components/Other.jsx';
 import { getWorkouts, createWorkout, deleteWorkout } from './api.js';
 
 export default function App() {
