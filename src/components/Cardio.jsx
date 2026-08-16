@@ -119,13 +119,15 @@ return (
             value={form.distance}
             onChange={handleChange}
           />
-          <input
-            name="isFail"
-            type="checkbox"
-            checked={form.isFail}
-            onChange={(e) => setForm((prev) => ({ ...prev, isFail: e.target.checked }))}
-          />
-          <label htmlFor="isFail">Failed Attempt</label>
+          <label className="checkbox-field">
+            <input
+              name="isFail"
+              type="checkbox"
+              checked={form.isFail}
+              onChange={(e) => setForm((prev) => ({ ...prev, isFail: e.target.checked }))}
+            />
+            Failed Attempt
+          </label>
         </div>
         <button type="submit" disabled={submitting}>
           {submitting ? 'Adding…' : 'Log workout'}
