@@ -6,6 +6,7 @@ const EMPTY_FORM = {
   exercise: EXERCISES_BY_CATEGORY['Cardio'][0],
   distance: '',
   duration: '30',
+  level: '',
   isFail: false,
 };
 
@@ -31,10 +32,12 @@ export default function Cardio({ workouts, onAdd }) {
         distance: form.distance,
         duration: form.duration,
         isFail: form.isFail,
+        level: form.exercise === 'Stair Master' ? form.level : undefined,
       });
       setForm((prev) => ({
         ...prev,
         distance: '',
+        level: '',
         isFail: false,
       }));
     } finally {
@@ -47,20 +50,19 @@ export default function Cardio({ workouts, onAdd }) {
     .reduce((latest, w) => (
       !latest || new Date(w.date) > new Date(latest.date) ? w : latest
     ), null);
-
-  const newGoal = latestCardio ? latestCardio.distance + 0.01 : null;
-
-  let content;
+  
+  let table;
   if (workouts.length === 0) {
-    content = <p className="empty-state">No workouts logged yet. Add your first one above.</p>;
+    table = <p className="empty-state">No workouts logged yet. Add your first one above.</p>;
   } else if (latestCardio == null) {
-    content = <p className="empty-state">No {form.exercise.toLowerCase()} exercises logged yet. Add your first one above.</p>;
+    table = <p className="empty-state">No {form.exercise.toLowerCase()} exercises logged yet. Add your first one above.</p>;
   } else {
-    content = (
+    const newGoal = latestCardio.exercise === 'Stair Master' ? latestCardio.distance + 1 : latestCardio.distance + 0.01;
+    table = (
       <div>
         <h3>Last {form.exercise} Attempt:</h3>
-        <h3 className="last-line">{new Date(latestCardio.date).toLocaleDateString()} — {latestCardio.distance.toFixed(2)} mi</h3>
-        <h3 className="last-line">New {form.exercise} Pace — {(Math.ceil((newGoal * 2) * 10) / 10).toFixed(1)} mph</h3>
+        <h3 className="last-line">{new Date(latestCardio.date).toLocaleDateString()} — {form.exercise === 'Stair Master' ? latestCardio.distance.toFixed(0) : latestCardio.distance.toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</h3>
+        <h3 className="last-line">New {form.exercise} Pace — {form.exercise === 'Stair Master' ? form.level + 1 : (Math.ceil((newGoal * 2) * 10) / 10).toFixed(1)} mph</h3>
         
         <div className="table-wrapper">
           <table>
@@ -73,27 +75,27 @@ export default function Cardio({ workouts, onAdd }) {
             <tbody>
               <tr>
                 <td>05:00</td>
-                <td>{(Math.ceil((newGoal / 6) * 100) / 100).toFixed(2)} mi</td>
+                <td>{form.exercise === 'Stair Master' ? Math.ceil(newGoal / 6).toFixed(0) : (Math.ceil((newGoal / 6) * 100) / 100).toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
               </tr>
               <tr>
                 <td>10:00</td>
-                <td>{(Math.ceil((newGoal / 6 * 2) * 100) / 100).toFixed(2)} mi</td>
+                <td>{form.exercise === 'Stair Master' ? Math.ceil(newGoal / 6 * 2).toFixed(0) : (Math.ceil((newGoal / 6 * 2) * 100) / 100).toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
               </tr>
               <tr>
                 <td>15:00</td>
-                <td>{(Math.ceil((newGoal / 6 * 3) * 100) / 100).toFixed(2)} mi</td>
+                <td>{form.exercise === 'Stair Master' ? Math.ceil(newGoal / 6 * 3).toFixed(0) : (Math.ceil((newGoal / 6 * 3) * 100) / 100).toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
               </tr>
               <tr>
                 <td>20:00</td>
-                <td>{(Math.ceil((newGoal / 6 * 4) * 100) / 100).toFixed(2)} mi</td>
+                <td>{form.exercise === 'Stair Master' ? Math.ceil(newGoal / 6 * 4).toFixed(0) : (Math.ceil((newGoal / 6 * 4) * 100) / 100).toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
               </tr>
               <tr>
                 <td>25:00</td>
-                <td>{(Math.ceil((newGoal / 6 * 5) * 100) / 100).toFixed(2)} mi</td>
+                <td>{form.exercise === 'Stair Master' ? Math.ceil(newGoal / 6 * 5).toFixed(0) : (Math.ceil((newGoal / 6 * 5) * 100) / 100).toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
               </tr>
               <tr>
                 <td>30:00</td>
-                <td>{(Math.ceil((newGoal) * 100) / 100).toFixed(2)} mi</td>
+                <td>{form.exercise === 'Stair Master' ? Math.ceil(newGoal).toFixed(0) : (Math.ceil((newGoal) * 100) / 100).toFixed(2)} {form.exercise === 'Stair Master' ? 'ft' : 'mi'}</td>
               </tr>
             </tbody>
           </table>
@@ -102,43 +104,93 @@ export default function Cardio({ workouts, onAdd }) {
     );
   }
 
-return (
-    <div>
-      <form className="workout-form" onSubmit={handleSubmit}>
-        <div className="field-row field-row--triple-alt">
-          <select name="exercise" value={form.exercise} onChange={handleChange} required>
-            {EXERCISES_BY_CATEGORY[form.category].map((ex) => (
-              <option key={ex} value={ex}>
-                {ex}
-              </option>
-            ))}
-          </select>
+let form;
+if (form.exercise === 'Stair Master') {
+  form = (
+    <form className="workout-form" onSubmit={handleSubmit}>
+      <div className="field-row field-row--double">
+        <select name="exercise" value={form.exercise} onChange={handleChange} required>
+          {EXERCISES_BY_CATEGORY[form.category].map((ex) => (
+            <option key={ex} value={ex}>
+              {ex}
+            </option>
+          ))}
+        </select>
+        <input
+          name="distance"
+          type="number"
+          min="0"
+          step="0.01"
+          placeholder="Distance (ft)"
+          value={form.distance}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="field-row field-row--double">
+        <input
+          name="level"
+          type="number"
+          min="1"
+          step="1"
+          placeholder="Level"
+          value={form.level}
+          onChange={handleChange}
+        />
+        <label className="checkbox-field">
           <input
-            name="distance"
-            type="number"
-            min="0"
-            step="0.01"
-            placeholder="Distance (mi)"
-            value={form.distance}
+            name="isFail"
+            type="checkbox"
+            checked={form.isFail}
             onChange={handleChange}
           />
-          <label className="checkbox-field">
-            <input
-              name="isFail"
-              type="checkbox"
-              checked={form.isFail}
-              onChange={handleChange}
-            />
-            Failed?
-          </label>
-        </div>
-        <button type="submit" disabled={submitting}>
-          {submitting ? 'Adding…' : 'Log Workout'}
-        </button>
-      </form>
-      <>
-        {content}
-      </>
-    </div>
+          Failed?
+        </label>
+      </div>
+      <button type="submit" disabled={submitting}>
+        {submitting ? 'Adding…' : 'Log Workout'}
+      </button>
+    </form>
+  )
+} else {
+  form = (
+    <form className="workout-form" onSubmit={handleSubmit}>
+      <div className="field-row field-row--triple-alt">
+        <select name="exercise" value={form.exercise} onChange={handleChange} required>
+          {EXERCISES_BY_CATEGORY[form.category].map((ex) => (
+            <option key={ex} value={ex}>
+              {ex}
+            </option>
+          ))}
+        </select>
+        <input
+          name="distance"
+          type="number"
+          min="0"
+          step="0.01"
+          placeholder="Distance (mi)"
+          value={form.distance}
+          onChange={handleChange}
+        />
+        <label className="checkbox-field">
+          <input
+            name="isFail"
+            type="checkbox"
+            checked={form.isFail}
+            onChange={handleChange}
+          />
+          Failed?
+        </label>
+      </div>
+      <button type="submit" disabled={submitting}>
+        {submitting ? 'Adding…' : 'Log Workout'}
+      </button>
+    </form>
+  )
+}
+return (
+    <>
+      {form}
+      {table}
+    </>
   );
 }
