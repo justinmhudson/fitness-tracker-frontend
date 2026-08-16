@@ -9,6 +9,7 @@ export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
     sets: '',
     reps: '',
     weight: '',
+    isFail: false,
   });
 
   const [submitting, setSubmitting] = useState(false);
@@ -38,12 +39,14 @@ export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
         sets: form.sets,
         reps: form.reps,
         weight: form.weight,
+        isFail: form.isFail,
       });
       setForm((prev) => ({
         ...prev,
         sets: '',
         reps: '',
         weight: '',
+        isFail: false,
       }));
     } finally {
       setSubmitting(false);
@@ -98,7 +101,7 @@ export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
           onChange={handleChange}
         />
       </div>
-      <div className="field-row field-row--double">
+      <div className="field-row field-row--triple">
         <input
           name="sets"
           type="number"
@@ -115,6 +118,15 @@ export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
           value={form.reps}
           onChange={handleChange}
         />
+        <label className="checkbox-field">
+          <input
+            name="isFail"
+            type="checkbox"
+            checked={form.isFail}
+            onChange={(e) => setForm((prev) => ({ ...prev, isFail: e.target.checked }))}
+          />
+          Failed Attempt?
+        </label>
       </div>
       <button type="submit" disabled={submitting}>
         {submitting ? 'Adding…' : 'Log workout'}
