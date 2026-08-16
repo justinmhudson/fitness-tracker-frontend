@@ -1,21 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
-const EMPTY_FORM = {
-  category: '',
-  exercise: '',
-  sets: '',
-  reps: '',
-  weight: '',
-};
-
 export default function UpperBodyForm({ onAdd , activeTab  }) {
-  const [form, setForm] = useState(EMPTY_FORM);
+
+  const [form, setForm] = useState({
+    category: activeTab,
+    exercise: EXERCISES_BY_CATEGORY[activeTab][0],
+    sets: '',
+    reps: '',
+    weight: '',
+  });
+
   const [submitting, setSubmitting] = useState(false);
 
-  category = activeTab; // Set the category based on the active tab
-  exercise = EXERCISES_BY_CATEGORY[category][0]; // Default to the first exercise in the category
-  setForm((prev) => ({ ...prev, category, exercise })); // Update the form state with the new category and exercise
+  // Whenever activeTab changes, sync category/exercise to match it.
+  // The [activeTab] dependency array means this only re-runs when
+  // activeTab itself changes — not on every render.
+  useEffect(() => {
+    setForm((prev) => ({
+      ...prev,
+      category: activeTab,
+      exercise: EXERCISES_BY_CATEGORY[activeTab][0],
+    }));
+  }, [activeTab]);
 
   function handleChange(e) {
     const { name, value } = e.target;   
@@ -35,7 +42,12 @@ export default function UpperBodyForm({ onAdd , activeTab  }) {
         reps: form.reps,
         weight: form.weight,
       });
-      setForm(EMPTY_FORM);
+      setForm((prev) => ({
+        ...prev,
+        sets: '',
+        reps: '',
+        weight: '',
+      }));
     } finally {
       setSubmitting(false);
     }
