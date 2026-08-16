@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import NavBar from './components/NavBar.jsx';
-import WorkoutList from './components/WorkoutList.jsx';
 import Cardio from './components/Cardio.jsx';
 import Weights from './components/Weights.jsx';
 import { getWorkouts, createWorkout, deleteWorkout } from './api.js';
