@@ -4,7 +4,8 @@ import { EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 // <input type="date"> requires "YYYY-MM-DD". MongoDB gives back a full
 // ISO timestamp (e.g. "2026-08-15T00:00:00.000Z"), so this trims it down.
 function toDateInputValue(isoString) {
-  return new Date(isoString).toISOString().slice(0, 10);
+
+  return new Date(isoString).toLocaleDateString('sv');
 }
 
 export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab }) {
