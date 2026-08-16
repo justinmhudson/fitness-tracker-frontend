@@ -1,10 +1,10 @@
 import UpperBodyForm from './UpperBodyForm.jsx';
 import { EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
-export default function UpperBody({ workouts, onAdd, onDelete }) {
+export default function UpperBody({ workouts, onAdd, onDelete, activeTab }) {
 
   // For each Upper Body exercise, find the single most recent logged entry.
-  const latestByExercise = EXERCISES_BY_CATEGORY['Upper Body']
+  const latestByExercise = EXERCISES_BY_CATEGORY[activeTab]
     .map((exerciseName) =>
       workouts
         .filter((w) => w.exercise === exerciseName)
@@ -18,7 +18,7 @@ export default function UpperBody({ workouts, onAdd, onDelete }) {
   if (workouts.length === 0) {
     content = <p className="empty-state">No workouts logged yet. Add your first one above.</p>;
   } else if (latestByExercise.length === 0) {
-    content = <p className="empty-state">No upper body exercises logged yet. Add your first one above.</p>;
+    content = <p className="empty-state">No {activeTab.toLowerCase()} exercises logged yet. Add your first one above.</p>;
   } else {
     content = (
       <div>
@@ -33,7 +33,7 @@ export default function UpperBody({ workouts, onAdd, onDelete }) {
 
   return (
     <>
-      <UpperBodyForm onAdd={onAdd} />
+      <UpperBodyForm onAdd={onAdd} activeTab={activeTab} />
       {content}
     </>
   );

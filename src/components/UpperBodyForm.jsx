@@ -2,16 +2,20 @@ import { useState } from 'react';
 import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
 const EMPTY_FORM = {
-  category: 'Upper Body',
-  exercise: EXERCISES_BY_CATEGORY['Upper Body'][0],
+  category: '',
+  exercise: '',
   sets: '',
   reps: '',
   weight: '',
 };
 
-export default function UpperBodyForm({ onAdd }) {
+export default function UpperBodyForm({ onAdd , activeTab  }) {
   const [form, setForm] = useState(EMPTY_FORM);
   const [submitting, setSubmitting] = useState(false);
+
+  category = activeTab; // Set the category based on the active tab
+  exercise = EXERCISES_BY_CATEGORY[category][0]; // Default to the first exercise in the category
+  setForm((prev) => ({ ...prev, category, exercise })); // Update the form state with the new category and exercise
 
   function handleChange(e) {
     const { name, value } = e.target;   
