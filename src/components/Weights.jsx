@@ -76,7 +76,6 @@ export default function Weights({ workouts, onAdd, activeTab }) {
                 <th>Weight</th>
                 <th>Sets</th>
                 <th>Reps</th>
-                <th>Failed?</th>
               </tr>
             </thead>
             <tbody>
@@ -86,7 +85,6 @@ export default function Weights({ workouts, onAdd, activeTab }) {
                   <td>{w.weight} lbs</td>
                   <td>{w.sets}</td>
                   <td>{w.reps}</td>
-                  <td>{w.isFail ? 'Yes' : 'No'}</td>
                 </tr>
               ))}
             </tbody>
