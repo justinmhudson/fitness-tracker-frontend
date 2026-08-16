@@ -6,7 +6,7 @@ const EMPTY_FORM = {
   exercise: EXERCISES_BY_CATEGORY['Other'][0],
 };
 
-export default function Other({ workouts, onAdd, onDelete }) {
+export default function Other({ workouts, onAdd }) {
 
   const [form, setForm] = useState(EMPTY_FORM);
   const [submitting, setSubmitting] = useState(false);

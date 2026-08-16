@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
-export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
+export default function Weights({ workouts, onAdd, activeTab }) {
 
   const [form, setForm] = useState({
     category: activeTab,

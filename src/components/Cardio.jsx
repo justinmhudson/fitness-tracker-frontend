@@ -9,7 +9,7 @@ const EMPTY_FORM = {
   isFail: false,
 };
 
-export default function Cardio({ workouts, onAdd, onDelete }) {
+export default function Cardio({ workouts, onAdd }) {
 
   const [form, setForm] = useState(EMPTY_FORM);
   const [submitting, setSubmitting] = useState(false);

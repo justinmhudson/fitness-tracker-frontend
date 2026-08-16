@@ -59,11 +59,11 @@ export default function App() {
       {loading ? (
         <p className="loading-state">Loading…</p>
       ) : activeTab === 'Cardio' ? (
-        <Cardio workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} />
+        <Cardio workouts={workouts} onAdd={handleAdd} />
       ) : activeTab === 'Other' ? (
-        <Other workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} />
+        <Other workouts={workouts} onAdd={handleAdd} />
       ) : (
-        <Weights workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} onUpdate={handleUpdate} activeTab={activeTab} />
+        <Weights workouts={workouts} onAdd={handleAdd} onUpdate={handleUpdate} activeTab={activeTab} />
       )}
     </div>
   );
