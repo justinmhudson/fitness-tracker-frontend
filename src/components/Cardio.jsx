@@ -58,7 +58,8 @@ export default function Cardio({ workouts, onAdd }) {
   } else {
     content = (
       <div>
-        <h3>Current {form.exercise} Pace — {Math.ceil((newGoal * 2) * 10) / 10} mph</h3>
+        <h3>Last {form.exercise} Attempt — {new Date(latestCardio.date).toLocaleDateString()} — {latestCardio.distance} mi</h3>
+        <h3>New {form.exercise} Pace — {Math.ceil((newGoal * 2) * 10) / 10} mph</h3>
         <div className="table-wrapper">
           <table>
             <thead>
