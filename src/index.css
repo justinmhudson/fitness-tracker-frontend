@@ -274,6 +274,14 @@ tr:hover td {
   background: #eef4f2;
 }
 
+.row--failed td {
+  color: var(--danger);
+}
+
+.row--failed:hover td {
+  background: #fbeae6;
+}
+
 .empty-state,
 .loading-state {
   text-align: center;

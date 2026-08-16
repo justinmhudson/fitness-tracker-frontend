@@ -54,29 +54,44 @@ export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
   }
 
   // For each Upper Body exercise, find the single most recent logged entry.
-  const latestByExercise = EXERCISES_BY_CATEGORY[activeTab]
-    .map((exerciseName) =>
-      workouts
-        .filter((w) => w.exercise === exerciseName)
-        .reduce((latest, w) => (
-          !latest || new Date(w.date) > new Date(latest.date) ? w : latest
-        ), null)
-    )
-    .filter((entry) => entry != null);
+  const recentForExercise = workouts
+    .filter((w) => w.exercise === form.exercise)
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 5);
 
   let content;
   if (workouts.length === 0) {
     content = <p className="empty-state">No workouts logged yet. Add your first one above.</p>;
-  } else if (latestByExercise.length === 0) {
+  } else if (recentForExercise.length === 0) {
     content = <p className="empty-state">No {activeTab.toLowerCase()} exercises logged yet. Add your first one above.</p>;
   } else {
     content = (
       <div>
-        {latestByExercise.map((w) => (
-          <p key={w._id}>
-            Most Recent {w.exercise}: {w.sets} × {w.reps} — {w.weight} lbs
-          </p>
-        ))}
+        <h3>Last Five {form.exercise} Attempts</h3>
+        <div className="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Weight</th>
+                <th>Sets</th>
+                <th>Reps</th>
+                <th>Failed?</th>
+              </tr>
+            </thead>
+            <tbody>
+              {recentForExercise.map((w) => (
+                <tr key={w._id} className={w.isFail ? 'row--failed' : ''}>
+                  <td>{new Date(w.date).toLocaleDateString()}</td>
+                  <td>{w.weight} lbs</td>
+                  <td>{w.sets}</td>
+                  <td>{w.reps}</td>
+                  <td>{w.isFail ? 'Yes' : 'No'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }
