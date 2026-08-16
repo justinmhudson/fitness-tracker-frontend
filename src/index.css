@@ -81,6 +81,12 @@ h3 {
   gap: 0.6rem;
 }
 
+.field-row--triple-alt {
+  display: grid;
+  grid-template-columns: 1.1fr 1.1fr 0.8fr;
+  gap: 0.6rem;
+}
+
 .field-row--double {
   display: grid;
   grid-template-columns: 1fr 1fr;

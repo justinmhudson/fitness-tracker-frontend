@@ -105,7 +105,7 @@ export default function Cardio({ workouts, onAdd }) {
 return (
     <div>
       <form className="workout-form" onSubmit={handleSubmit}>
-        <div className="field-row field-row--triple">
+        <div className="field-row field-row--triple-alt">
           <select name="exercise" value={form.exercise} onChange={handleChange} required>
             {EXERCISES_BY_CATEGORY[form.category].map((ex) => (
               <option key={ex} value={ex}>
