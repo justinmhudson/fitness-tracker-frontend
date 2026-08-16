@@ -1,7 +1,7 @@
-import UpperBodyForm from './UpperBodyForm.jsx';
+import WeightsForm from './WeightsForm.jsx';
 import { EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
-export default function UpperBody({ workouts, onAdd, onDelete, activeTab }) {
+export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
 
   // For each Upper Body exercise, find the single most recent logged entry.
   const latestByExercise = EXERCISES_BY_CATEGORY[activeTab]
@@ -33,7 +33,7 @@ export default function UpperBody({ workouts, onAdd, onDelete, activeTab }) {
 
   return (
     <>
-      <UpperBodyForm onAdd={onAdd} activeTab={activeTab} />
+      <WeightsForm onAdd={onAdd} activeTab={activeTab} />
       {content}
     </>
   );

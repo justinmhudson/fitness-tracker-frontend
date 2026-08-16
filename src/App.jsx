@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import NavBar from './components/NavBar.jsx';
 import WorkoutList from './components/WorkoutList.jsx';
 import Cardio from './components/Cardio.jsx';
-import UpperBody from './components/UpperBody.jsx';
+import Weights from './components/Weights.jsx';
 import { getWorkouts, createWorkout, deleteWorkout } from './api.js';
 
 export default function App() {
@@ -52,7 +52,7 @@ export default function App() {
       ) : activeTab === 'Cardio' ? (
         <Cardio workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} />
       ) : (
-        <UpperBody workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} activeTab={activeTab} />
+        <Weights workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} activeTab={activeTab} />
       )}
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
-export default function UpperBodyForm({ onAdd , activeTab  }) {
+export default function WeightsForm({ onAdd , activeTab  }) {
 
   const [form, setForm] = useState({
     category: activeTab,
@@ -13,9 +13,6 @@ export default function UpperBodyForm({ onAdd , activeTab  }) {
 
   const [submitting, setSubmitting] = useState(false);
 
-  // Whenever activeTab changes, sync category/exercise to match it.
-  // The [activeTab] dependency array means this only re-runs when
-  // activeTab itself changes — not on every render.
   useEffect(() => {
     setForm((prev) => ({
       ...prev,
