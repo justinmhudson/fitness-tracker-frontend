@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
 
-export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
+export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab }) {
 
   const [form, setForm] = useState({
     category: activeTab,
@@ -13,6 +13,9 @@ export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
   });
 
   const [submitting, setSubmitting] = useState(false);
+  const [editingId, setEditingId] = useState(null);
+  const [editValues, setEditValues] = useState({ weight: '', sets: '', reps: '', isFail: false });
+  const [savingEdit, setSavingEdit] = useState(false);
 
   useEffect(() => {
     setForm((prev) => ({
@@ -23,8 +26,8 @@ export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
   }, [activeTab]);
 
   function handleChange(e) {
-    const { name, value } = e.target;   
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;   
+    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   }
 
   async function handleSubmit(e) {
@@ -53,8 +56,36 @@ export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
     }
   }
 
-  // For each Upper Body exercise, find the single most recent logged entry.
-  const recentForExercise = workouts
+  function startEditing(w) {
+    setEditingId(w._id);
+    setEditValues({ weight: w.weight, sets: w.sets, reps: w.reps, isFail: w.isFail });
+  }
+
+  function cancelEditing() {
+    setEditingId(null);
+  }
+
+  function handleEditChange(e) {
+    const { name, value, type, checked } = e.target;
+    setEditValues((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+  }
+
+  async function saveEdit(id) {
+    setSavingEdit(true);
+    try {
+      await onUpdate(id, {
+        weight: Number(editValues.weight),
+        sets: Number(editValues.sets),
+        reps: Number(editValues.reps),
+        isFail: editValues.isFail,
+      });
+      setEditingId(null);
+    } finally {
+      setSavingEdit(false);
+    }
+  }
+
+  const recentWeights = workouts
     .filter((w) => w.exercise === form.exercise)
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 5);
@@ -62,8 +93,8 @@ export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
   let content;
   if (workouts.length === 0) {
     content = <p className="empty-state">No workouts logged yet. Add your first one above.</p>;
-  } else if (recentForExercise.length === 0) {
-    content = <p className="empty-state">No {activeTab.toLowerCase()} exercises logged yet. Add your first one above.</p>;
+  } else if (recentWeights.length === 0) {
+    content = <p className="empty-state">No {form.exercise} entries logged yet. Add your first one above.</p>;
   } else {
     content = (
       <div>
@@ -77,18 +108,94 @@ export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
                 <th>Sets</th>
                 <th>Reps</th>
                 <th>Failed?</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {recentForExercise.map((w) => (
-                <tr key={w._id} className={w.isFail ? 'row--failed' : ''}>
-                  <td>{new Date(w.date).toLocaleDateString()}</td>
-                  <td>{w.weight} lbs</td>
-                  <td>{w.sets}</td>
-                  <td>{w.reps}</td>
-                  <td>{w.isFail ? 'Yes' : 'No'}</td>
-                </tr>
-              ))}
+              {recentWeights.map((w) => {
+                const isEditing = editingId === w._id;
+                return (
+                  <tr key={w._id} className={w.isFail ? 'row--failed' : ''}>
+                    <td>{new Date(w.date).toLocaleDateString()}</td>
+                    {isEditing ? (
+                      <>
+                        <td>
+                          <input
+                            className="table-edit-input"
+                            name="weight"
+                            type="number"
+                            min="0"
+                            value={editValues.weight}
+                            onChange={handleEditChange}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            className="table-edit-input"
+                            name="sets"
+                            type="number"
+                            min="0"
+                            value={editValues.sets}
+                            onChange={handleEditChange}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            className="table-edit-input"
+                            name="reps"
+                            type="number"
+                            min="0"
+                            value={editValues.reps}
+                            onChange={handleEditChange}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            name="isFail"
+                            type="checkbox"
+                            checked={editValues.isFail}
+                            onChange={handleEditChange}
+                          />
+                        </td>
+                        <td className="table-actions">
+                          <button
+                            type="button"
+                            className="table-action-btn"
+                            onClick={() => saveEdit(w._id)}
+                            disabled={savingEdit}
+                          >
+                            {savingEdit ? 'Saving…' : 'Save'}
+                          </button>
+                          <button
+                            type="button"
+                            className="table-action-btn table-action-btn--cancel"
+                            onClick={cancelEditing}
+                            disabled={savingEdit}
+                          >
+                            Cancel
+                          </button>
+                        </td>
+                      </>
+                    ) : (
+                      <>
+                        <td>{w.weight} lbs</td>
+                        <td>{w.sets}</td>
+                        <td>{w.reps}</td>
+                        <td>{w.isFail ? 'Yes' : 'No'}</td>
+                        <td className="table-actions">
+                          <button
+                            type="button"
+                            className="table-action-btn"
+                            onClick={() => startEditing(w)}
+                          >
+                            Edit
+                          </button>
+                        </td>
+                      </>
+                    )}
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -138,7 +245,7 @@ export default function Weights({ workouts, onAdd, onDelete, activeTab }) {
             name="isFail"
             type="checkbox"
             checked={form.isFail}
-            onChange={(e) => setForm((prev) => ({ ...prev, isFail: e.target.checked }))}
+            onChange={handleChange}
           />
           Failed Attempt?
         </label>

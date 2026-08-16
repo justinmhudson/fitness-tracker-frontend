@@ -3,7 +3,7 @@ import NavBar from './components/NavBar.jsx';
 import Cardio from './components/Cardio.jsx';
 import Weights from './components/Weights.jsx';
 import Other from './components/Other.jsx';
-import { getWorkouts, createWorkout, deleteWorkout } from './api.js';
+import { getWorkouts, createWorkout, deleteWorkout, updateWorkout  } from './api.js';
 
 export default function App() {
   const [workouts, setWorkouts] = useState([]);
@@ -37,6 +37,15 @@ export default function App() {
     }
   }
 
+  async function handleUpdate(id, updates) {
+  try {
+    const updated = await updateWorkout(id, updates);
+    setWorkouts((prev) => prev.map((w) => (w._id === id ? updated : w)));
+  } catch {
+    setError('Failed to update workout. Try again.');
+  }
+}
+
   return (
     <div className="app">
       <header>
@@ -54,7 +63,7 @@ export default function App() {
       ) : activeTab === 'Other' ? (
         <Other workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} />
       ) : (
-        <Weights workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} activeTab={activeTab} />
+        <Weights workouts={workouts} onAdd={handleAdd} onDelete={handleDelete} onUpdate={handleUpdate} activeTab={activeTab} />
       )}
     </div>
   );

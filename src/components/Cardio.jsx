@@ -15,8 +15,8 @@ export default function Cardio({ workouts, onAdd, onDelete }) {
   const [submitting, setSubmitting] = useState(false);
 
   function handleChange(e) {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   }
 
   async function handleSubmit(e) {
@@ -124,7 +124,7 @@ return (
               name="isFail"
               type="checkbox"
               checked={form.isFail}
-              onChange={(e) => setForm((prev) => ({ ...prev, isFail: e.target.checked }))}
+              onChange={handleChange}
             />
             Failed Attempt?
           </label>
