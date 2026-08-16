@@ -20,7 +20,7 @@ export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab
 
   const [submitting, setSubmitting] = useState(false);
   const [editingId, setEditingId] = useState(null);
-  const [editValues, setEditValues] = useState({ weight: '', sets: '', reps: '', isFail: false });
+  const [editValues, setEditValues] = useState({ date: '', weight: '', sets: '', reps: '', isFail: false });
   const [savingEdit, setSavingEdit] = useState(false);
 
   useEffect(() => {
@@ -64,7 +64,13 @@ export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab
 
   function startEditing(w) {
     setEditingId(w._id);
-    setEditValues({ weight: w.weight, sets: w.sets, reps: w.reps, isFail: w.isFail });
+    setEditValues({
+      date: toDateInputValue(w.date),
+      weight: w.weight,
+      sets: w.sets,
+      reps: w.reps,
+      isFail: w.isFail,
+    });
   }
 
   function cancelEditing() {
@@ -80,6 +86,7 @@ export default function Weights({ workouts, onAdd, onDelete, onUpdate, activeTab
     setSavingEdit(true);
     try {
       await onUpdate(id, {
+        date: editValues.date,
         weight: Number(editValues.weight),
         sets: Number(editValues.sets),
         reps: Number(editValues.reps),
