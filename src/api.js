@@ -10,7 +10,7 @@ export async function getWorkouts() {
 }
 
 export async function searchWorkouts(query) {
-  const res = await fetch(API_URL + '?' + query.toString());
+  const res = await fetch(API_URL + '/search?' + query.toString());
   if (!res.ok) throw new Error('Failed to search workouts');
   return res.json();
 }

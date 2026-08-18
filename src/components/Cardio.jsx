@@ -46,7 +46,7 @@ export default function Cardio({ workouts, onAdd }) {
     }
   }
 
-  const latestCardio = searchWorkouts('exercise=' + form.exercise + '&duration=30&isFail=false&limit=1');
+  const latestCardio = searchWorkouts(`exercise=${form.exercise}&duration=30&isFail=false&limit=1`);
   
   let table;
   if (workouts.length === 0) {
