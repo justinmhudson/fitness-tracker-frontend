@@ -3,7 +3,7 @@ import NavBar from './components/NavBar.jsx';
 import Cardio from './components/Cardio.jsx';
 import Weights from './components/Weights.jsx';
 import Other from './components/Other.jsx';
-import { getWorkouts, searchWorkouts, createWorkout, deleteWorkout, updateWorkout  } from './api.js';
+import { getWorkouts, createWorkout, deleteWorkout, updateWorkout  } from './api.js';
 
 export default function App() {
   const [workouts, setWorkouts] = useState([]);

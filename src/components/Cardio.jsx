@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { CATEGORIES, EXERCISES_BY_CATEGORY } from '../exerciseOptions.js';
-import { searchWorkouts } from '../api.js';
 
 const EMPTY_FORM = {
   category: 'Cardio',
@@ -46,7 +45,11 @@ export default function Cardio({ workouts, onAdd }) {
     }
   }
 
-  const latestCardio = searchWorkouts(`exercise=${form.exercise}&duration=30&isFail=false&limit=1`);
+  const latestCardio = workouts
+    .filter((w) => w.exercise === form.exercise && w.duration === 30 && !w.isFail)
+    .reduce((latest, w) => (
+      !latest || new Date(w.date) > new Date(latest.date) ? w : latest
+    ), null);
   
   let table;
   if (workouts.length === 0) {

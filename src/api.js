@@ -9,12 +9,6 @@ export async function getWorkouts() {
   return res.json();
 }
 
-export async function searchWorkouts(query) {
-  const res = await fetch(API_URL + '/search?' + query.toString());
-  if (!res.ok) throw new Error('Failed to search workouts');
-  return res.json();
-}
-
 export async function createWorkout(workout) {
   const res = await fetch(API_URL, {
     method: 'POST',
