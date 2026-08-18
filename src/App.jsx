@@ -13,7 +13,7 @@ export default function App() {
 
   // Load workouts once when the app first mounts
   useEffect(() => {
-    getWorkouts()
+    searchWorkouts('')
       .then(setWorkouts)
       .catch(() => setError('Could not reach the server. Is your backend running?'))
       .finally(() => setLoading(false));
