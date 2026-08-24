@@ -3,7 +3,7 @@
 
 export const EXERCISES_BY_CATEGORY = {
   Cardio: ['Treadmill', 'Stair Master', 'Stationary Bike'],
-  'Upper Body': ['Chest Press', 'Pulldown', 'Row', 'Shoulder Press', 'Bicep Curl', 'Tricep Press'],
+  'Upper Body': ['Chest Press', 'Pulldown', 'Row', 'Shoulder Press', 'Bicep Curl', 'Tricep Press','Triceps Extension'],
   'Lower Body': ['Leg Press', 'Back Extension', 'Leg Curl', 'Calf Extension', 'Abdominal'],
   'Other': ['Yoga', 'Balance'],
 };
