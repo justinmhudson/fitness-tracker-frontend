@@ -227,14 +227,21 @@ button:disabled {
 
 /* Nav bar */
 .navbar {
+  margin-bottom: 1.5rem;
+}
+ 
+.navbar__hamburger {
+  display: none; /* only shown under the mobile breakpoint below */
+}
+ 
+.navbar__tabs {
   display: flex;
   gap: 0.4rem;
   overflow-x: auto;
-  margin-bottom: 1.5rem;
   padding-bottom: 0.3rem;
   border-bottom: 1px solid var(--border);
 }
-
+ 
 .navbar__tab {
   width: auto;
   white-space: nowrap;
@@ -245,17 +252,98 @@ button:disabled {
   font-size: 0.88rem;
   border-radius: 8px 8px 0 0;
 }
-
+ 
 .navbar__tab:hover {
   background: #eef4f2;
   color: var(--primary-dark);
 }
-
+ 
 .navbar__tab--active {
   background: var(--card);
   color: var(--primary-dark);
   border: 1px solid var(--border);
   border-bottom: 2px solid var(--primary);
+}
+ 
+@media (max-width: 480px) {
+  .navbar__hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--primary-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+ 
+  .navbar__hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 20px;
+  }
+ 
+  .navbar__hamburger-icon span {
+    display: block;
+    height: 2px;
+    background: var(--primary-dark);
+    border-radius: 2px;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+  }
+ 
+  .navbar__hamburger-icon--open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+ 
+  .navbar__hamburger-icon--open span:nth-child(2) {
+    opacity: 0;
+  }
+ 
+  .navbar__hamburger-icon--open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+ 
+  .navbar__tabs {
+    display: none; /* collapsed until toggled open */
+    flex-direction: column;
+    overflow-x: visible;
+    margin-top: 0.4rem;
+    padding-bottom: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+ 
+  .navbar__tabs--open {
+    display: flex;
+  }
+ 
+  .navbar__tab {
+    border-radius: 0;
+    border-bottom: 1px solid var(--border);
+    border-left: 3px solid transparent;
+    text-align: left;
+    padding: 0.7rem 0.9rem;
+  }
+ 
+  .navbar__tab:last-child {
+    border-bottom: none;
+  }
+ 
+  .navbar__tab--active {
+    border: none;
+    border-bottom: 1px solid var(--border);
+    border-left: 3px solid var(--primary);
+  }
+ 
+  .navbar__tab:last-child.navbar__tab--active {
+    border-bottom: none;
+  }
 }
 
 /* Tables */
