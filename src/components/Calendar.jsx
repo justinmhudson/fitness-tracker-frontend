@@ -10,6 +10,16 @@ function pad(n) {
   return String(n).padStart(2, '0');
 }
 
+// Turns a stored ISO timestamp into the viewer's local calendar date,
+// e.g. "2026-08-15T04:00:19.354Z" -> "2026-08-14" for someone in a
+// timezone behind UTC. new Date(isoString) auto-converts to local time;
+// getFullYear/getMonth/getDate (no "UTC" prefix) read it back in that
+// same local time, which is exactly what we want here.
+function toLocalDateKey(isoString) {
+  const d = new Date(isoString);
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
 const MONTH_NAMES = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
@@ -19,23 +29,20 @@ const WEEKDAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 export default function Calendar({ workouts }) {
   const today = new Date();
-  const [year, setYear] = useState(today.getUTCFullYear());
-  const [month, setMonth] = useState(today.getUTCMonth()); // 0-indexed
+  const [year, setYear] = useState(today.getFullYear());
+  const [month, setMonth] = useState(today.getMonth()); // 0-indexed
 
-  // Group workouts by their UTC calendar date, tracking which categories
-  // were logged that day — e.g. "2026-08-15" -> Set{"Cardio","Upper Body"}.
-  // Workout dates come back from Mongo as ISO strings like
-  // "2026-08-15T04:00:19.354Z", so slicing the first 10 characters gives
-  // the UTC calendar date directly, no Date object needed.
+  // Group workouts by the viewer's local calendar date, tracking which
+  // categories were logged that day — e.g. "2026-08-15" -> Set{"Cardio"}.
   const categoriesByDate = {};
   workouts.forEach((w) => {
-    const key = w.date.slice(0, 10);
+    const key = toLocalDateKey(w.date);
     if (!categoriesByDate[key]) categoriesByDate[key] = new Set();
     categoriesByDate[key].add(w.category);
   });
 
-  const firstWeekday = new Date(Date.UTC(year, month, 1)).getUTCDay();
-  const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+  const firstWeekday = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
 
   const cells = [];
   for (let i = 0; i < firstWeekday; i++) {
