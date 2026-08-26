@@ -336,7 +336,7 @@ tr:hover td {
 }
  
 .badge--cardio {
-  background: #d1495b;
+  background: var(--altink);
 }
  
 .badge--upper-body {
@@ -344,7 +344,7 @@ tr:hover td {
 }
  
 .badge--lower-body {
-  background: #3d5a80;
+  background: var(--primary-dark);
 }
  
 .badge--flexibility {
