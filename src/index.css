@@ -228,6 +228,7 @@ button:disabled {
 /* Nav bar */
 .navbar {
   margin-bottom: 1.5rem;
+  position: relative;
 }
  
 .navbar__hamburger {
@@ -324,6 +325,9 @@ button:disabled {
  
   .navbar__tabs--open {
     display: flex;
+    background: var(--card);
+    position: absolute;
+    width: 100%;
   }
  
   .navbar__tab {
