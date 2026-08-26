@@ -464,8 +464,13 @@ tr:hover td {
 @media (max-width: 480px) {
   .calendar__cell {
     min-height: 56px;
+    min-width: stretch;
   }
   .calendar__day-number {
     font-size: 0.68rem;
   }
+  .calendar__badges .badge {
+    font-size: .33rem;
+    padding: .19rem;
+}
 }
