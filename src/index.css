@@ -233,6 +233,10 @@ button:disabled {
 .navbar__hamburger {
   display: none; /* only shown under the mobile breakpoint below */
 }
+
+.navbar__hamburger:hover {
+    background: var(--card);
+}
  
 .navbar__tabs {
   display: flex;
@@ -265,7 +269,7 @@ button:disabled {
   border-bottom: 2px solid var(--primary);
 }
  
-@media (max-width: 480px) {
+@media (max-width: 505px) {
   .navbar__hamburger {
     display: flex;
     align-items: center;
