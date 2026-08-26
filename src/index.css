@@ -36,6 +36,7 @@ h1 {
   letter-spacing: -0.02em;
   margin: 0 0 0.3rem;
   color: var(--primary-dark);
+  justify-self: center;
 }
 
 h2 {
@@ -43,6 +44,7 @@ h2 {
   letter-spacing: -0.02em;
   margin: 0 0 0.3rem;
   color: var(--primary-dark);
+  justify-self: center;
 }
 
 h3 {
@@ -50,6 +52,7 @@ h3 {
   letter-spacing: -0.02em;
   margin: 0 0 0.3rem;
   color: var(--primary-dark);
+  justify-self: center;
 }
 
 .last-line {
