@@ -247,7 +247,6 @@ button:disabled {
 }
  
 .navbar__tab {
-  width: auto;
   white-space: nowrap;
   padding: 0.5rem 0.9rem;
   background: transparent;
@@ -562,7 +561,7 @@ tr:hover td {
     font-size: 0.68rem;
   }
   .calendar__badges .badge {
-    font-size: .33rem;
-    padding: .19rem;
+    font-size: .28rem;
+    padding: .15rem;
 }
 }
