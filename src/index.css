@@ -322,3 +322,135 @@ tr:hover td {
   font-size: 0.9rem;
   margin-bottom: 1.2rem;
 }
+
+/* Category badges — one distinct color per exercise category, reused
+   in both the calendar legend and the day cells themselves. */
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+}
+ 
+.badge--cardio {
+  background: #d1495b;
+}
+ 
+.badge--upper-body {
+  background: var(--primary);
+}
+ 
+.badge--lower-body {
+  background: #3d5a80;
+}
+ 
+.badge--flexibility {
+  background: #8a5a83;
+}
+ 
+.badge--balance {
+  background: #b58900;
+}
+ 
+.badge--other {
+  background: #5b6b68;
+}
+ 
+/* Calendar */
+.calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+ 
+.calendar__header h2 {
+  margin: 0;
+  color: var(--primary-dark);
+  min-width: 180px;
+  text-align: center;
+}
+ 
+.calendar__nav-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--primary-dark);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+ 
+.calendar__nav-btn:hover {
+  background: var(--paper);
+}
+ 
+.calendar__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+ 
+.calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.4rem;
+}
+ 
+.calendar__weekday {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #7a8a86;
+  padding-bottom: 0.3rem;
+}
+ 
+.calendar__cell {
+  min-height: 74px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+ 
+.calendar__cell--empty {
+  background: transparent;
+  border: none;
+}
+ 
+.calendar__day-number {
+  font-size: 0.78rem;
+  color: #7a8a86;
+  font-weight: 600;
+}
+ 
+.calendar__badges {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+ 
+.calendar__badges .badge {
+  font-size: 0.62rem;
+  padding: 0.1rem 0.4rem;
+}
+ 
+@media (max-width: 480px) {
+  .calendar__cell {
+    min-height: 56px;
+  }
+  .calendar__day-number {
+    font-size: 0.68rem;
+  }
+}

@@ -3,7 +3,8 @@ import NavBar from './components/NavBar.jsx';
 import Cardio from './components/Cardio.jsx';
 import Weights from './components/Weights.jsx';
 import Other from './components/Other.jsx';
-import { getWorkouts, searchWorkouts, createWorkout, deleteWorkout, updateWorkout  } from './api.js';
+import Calendar from './components/Calendar.jsx';
+import { searchWorkouts, createWorkout, deleteWorkout, updateWorkout  } from './api.js';
 
 export default function App() {
   const [workouts, setWorkouts] = useState([]);
@@ -62,6 +63,8 @@ export default function App() {
         <Cardio workouts={workouts} onAdd={handleAdd} />
       ) : activeTab === 'Other' ? (
         <Other workouts={workouts} onAdd={handleAdd} />
+      ) : activeTab === 'Calendar' ? (
+        <Calendar workouts={workouts} />
       ) : (
         <Weights workouts={workouts} onAdd={handleAdd} onUpdate={handleUpdate} activeTab={activeTab} />
       )}
