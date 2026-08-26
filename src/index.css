@@ -331,7 +331,6 @@ tr:hover td {
   border-radius: 999px;
   font-size: 0.72rem;
   font-weight: 600;
-  color: white;
   white-space: nowrap;
 }
  
@@ -342,22 +341,27 @@ tr:hover td {
  
 .badge--upper-body {
   background: var(--primary);
+  color: white;
 }
  
 .badge--lower-body {
   background: var(--primary-dark);
+  color: white;
 }
  
 .badge--flexibility {
   background: #8a5a83;
+  color: white;
 }
  
 .badge--balance {
   background: #b58900;
+  color: white;
 }
  
 .badge--other {
   background: #5b6b68;
+  color: white;
 }
  
 /* Calendar */
