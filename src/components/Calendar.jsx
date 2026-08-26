@@ -32,6 +32,10 @@ export default function Calendar({ workouts }) {
   const [year, setYear] = useState(today.getFullYear());
   const [month, setMonth] = useState(today.getMonth()); // 0-indexed
 
+  // Computed once per render so every cell can cheaply check against it,
+  // rather than each cell constructing its own Date to compare.
+  const todayKey = toLocalDateKey(today.toISOString());
+
   // Group workouts by the viewer's local calendar date, tracking which
   // categories were logged that day — e.g. "2026-08-15" -> Set{"Cardio"}.
   const categoriesByDate = {};
@@ -102,8 +106,9 @@ export default function Calendar({ workouts }) {
           }
           const key = `${year}-${pad(month + 1)}-${pad(day)}`;
           const categories = categoriesByDate[key];
+          const isToday = key === todayKey;
           return (
-            <div key={key} className="calendar__cell">
+            <div key={key} className={isToday ? 'calendar__cell calendar__cell--today' : 'calendar__cell'}>
               <span className="calendar__day-number">{day}</span>
               {categories && (
                 <div className="calendar__badges">

@@ -433,7 +433,17 @@ tr:hover td {
   background: transparent;
   border: none;
 }
+
+.calendar__cell--today {
+  border: 2px solid var(--primary);
+  background: #eef4f2;
+}
  
+.calendar__cell--today .calendar__day-number {
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
 .calendar__day-number {
   font-size: 0.78rem;
   color: #7a8a86;
