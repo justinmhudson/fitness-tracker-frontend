@@ -120,7 +120,7 @@ if (form.exercise === 'Stair Master') {
           name="distance"
           type="number"
           min="0"
-          step="0.01"
+          step="1"
           placeholder="Distance (ft)"
           value={form.distance}
           onChange={handleChange}
